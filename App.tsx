@@ -1,21 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView, SafeAreaView } from 'react-native';
+import Header from './src/components/Header/Header'
+import Form from './src/components/Form/Form'
+import { styles } from './App.styles'
+import { appName } from './src/utils/constants'
+
+/* 
+  This component is the main app component that is the one in charge of 
+  the components structure organization and also will handle the search of
+  directories (data request).
+*/
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Header title={appName}/>
+      <ScrollView contentContainerStyle={styles.scrollableContainer}>
+        <Form />
+      </ScrollView>
+    </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
