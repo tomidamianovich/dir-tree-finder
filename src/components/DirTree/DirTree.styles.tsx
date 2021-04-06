@@ -9,7 +9,7 @@ const msgBox = {
 
 export const styles = StyleSheet.create({
   directoryContainer: {
-    backgroundColor: 'lightgrey',
+    backgroundColor: theme.color.lightgrey,
     borderRadius: 10,
     padding: 20
   },

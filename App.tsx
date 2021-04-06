@@ -6,8 +6,6 @@ import DirTree from './src/components/DirTree/DirTree'
 import { styles } from './App.styles'
 import { appName, theme } from './src/utils/constants'
 import { Directory } from './src/utils/types'
-import {Dimensions} from 'react-native';
-import { apiResponse } from './src/utils/store'
 
 /* 
   This component is the main app component that is the one in charge of 
@@ -33,10 +31,11 @@ export default function App() {
       return
     }
     handleNewRequestInitialState(url)
-    setTimeout(function(){
-      setDirList(apiResponse)
-      setLoading(false)
-    },3000)
+    fetch(url)
+      .then(response => response.json())
+      .then(data => setDirList(data))
+      .catch(() => setError(true))
+      .finally(() => setLoading(false))
   }
 
 
