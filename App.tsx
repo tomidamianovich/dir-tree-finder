@@ -28,6 +28,7 @@ export default function App() {
     if (!checkUrlString(url)) {
       setUrlNotValid(true);
       setError(true);
+      setDirList([]);
       return
     }
     handleNewRequestInitialState(url)
