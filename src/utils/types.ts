@@ -8,6 +8,8 @@ export type File = {
   name: string
 };
 
-export type Directory = File & {
-  files: Directory[]
-};
+export type Directory = {
+  type: string,
+  name: string
+  files: Directory[] | Directory
+} | [];

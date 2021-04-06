@@ -1,24 +1,50 @@
 import React from 'react';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView, TextInput, Text, Button } from 'react-native';
 import { styles } from './Form.styles';
-import { companyName } from '../../utils/constants';
+import { theme, companyName, formConst } from '../../utils/constants';
 
 type Props = {
-  title?: string;
+  lastUrlSearched?: string;
+  handleDirSearch?: (arg0: string) => void;
 };
 
-/*
-  This component is a form that shows the url input and the search
-  and refresh implementation, the retrieve of the data will be handled
-  by the App.tsx file when this component emits the submit event.
-*/
-
 const Form: React.FC<Props> = ({
-  title = `${companyName} App`
+  lastUrlSearched = '',
+  handleDirSearch = () => {}
 }) => {
+  const [value, setInputValue] = React.useState('');
+  const [alreadyLoadedSearch, setAlreadyLoadedSearch] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
+
+  const handleSubmit = () => {
+    handleDirSearch(value);
+    setAlreadyLoadedSearch(true);
+  };
+
+  const handleInputValueChange = (value:string) => {
+    setInputValue(value);
+    setAlreadyLoadedSearch(false);
+  };
+
+  const handleClearInput = () => {
+    setInputValue('');
+  };
+
   return (
-    <SafeAreaView style={styles.form}>
-      {title}
+    <SafeAreaView>
+      <Text>{formConst.inputLabel}</Text>
+      <TextInput
+        style={styles.input}
+        onChangeText={(val) => handleInputValueChange(val)}
+        value={value}
+        placeholder={formConst.placeholderUrl}
+      />
+      <Button
+        color={theme.color.primary}
+        title={alreadyLoadedSearch ? formConst.refreshButtonText : formConst.searchButtonText }
+        onPress={handleSubmit}
+        disabled={loading}
+      />
     </SafeAreaView>
   );
 };

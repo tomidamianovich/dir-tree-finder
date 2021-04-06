@@ -2,9 +2,12 @@ import React from 'react';
 import { View } from 'react-native';
 import { styles } from './DirTree.styles';
 import { Directory } from '../../utils/types';
+import TreeView from 'react-native-final-tree-view';
+import DirItem from '../DirItem/DirItem';
 
 type Props = {
   dirList?: Directory[];
+  index2?: number
 };
 
 /*
@@ -13,14 +16,25 @@ type Props = {
   is not implemented yet.
 */
 
-const Form: React.FC<Props> = ({
+const DirTree: React.FC<Props> = ({
   dirList = []
 }) => {
   return (
     <View style={styles.directoryContainer}>
-      
+      <TreeView
+        idKey="name"
+        childrenKey="files"
+        data={dirList} // defined above
+        renderNode={({ node, level, isExpanded, hasChildrenNodes }) =>
+          <DirItem
+            node={node}
+            level={level}
+            isExpanded={isExpanded}
+            hasChildrenNodes={hasChildrenNodes} />
+        }
+      />
     </View>
   );
 };
 
-export default Form;
+export default DirTree;
