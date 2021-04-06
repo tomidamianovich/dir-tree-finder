@@ -1,4 +1,11 @@
 import { StyleSheet } from 'react-native';
+import { theme } from '../../utils/constants';
+
+const msgBox = {
+  padding: 25,
+  margin: 10,
+  color: 'white'
+};
 
 export const styles = StyleSheet.create({
   directoryContainer: {
@@ -6,7 +13,12 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 20
   },
-  directoryItem: {
-    backgroundColor: 'red'
+  noDataMsg: {
+    ...msgBox,
+    backgroundColor: theme.color.info
+  },
+  erroMsg: {
+    ...msgBox,
+    backgroundColor: theme.color.warning
   }
 });

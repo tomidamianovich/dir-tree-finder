@@ -1,13 +1,16 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-// import { styles } from './DirItem.styles';
 import { Directory } from '../../utils/types';
+import { dirItems, theme } from '../../utils/constants';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faFolder, faFolderOpen, faFile } from '@fortawesome/free-solid-svg-icons';
+import { styles } from './DirItem.styles';
 
 type Props = {
-  node: Directory,
+  item: Directory,
   level: number,
   isExpanded: boolean,
-  hasChildrenNodes: boolean
+  hasChildrenitems: boolean
 };
 
 /*
@@ -15,26 +18,43 @@ type Props = {
   it could be another directory (with files or empty) or just a file.
 */
 
-function getIndicator (isExpanded: boolean, hasChildrenNodes: boolean, node: Directory) {
-  if (!hasChildrenNodes) {
-    return node.type === 'directory' ? '[]' : '-';
-  } else if (isExpanded) {
-    return '\\/';
-  } else {
-    return '>';
+// This method will return the icon of the folder (empty or not) or the file in
+// order to be showed in the directory tree
+const getIcon = (isExpanded: boolean, hasChildrenitems: boolean, item: Directory) => {
+  const { file, dir } = dirItems.types;
+  let icon = faFolder;
+  switch (true) {
+    case !hasChildrenitems && item.type === file:
+      icon = faFile;
+      break;
+    case isExpanded || (!hasChildrenitems && item.type === dir):
+      icon = faFolderOpen;
+      break;
   }
-}
-
+  return <FontAwesomeIcon icon={ icon } size={18} color={theme.color.gray} />;
+};
 const DirItem: React.FC<Props> = ({
-  node,
-  level,
-  isExpanded,
-  hasChildrenNodes
+  item, // A directory child
+  level, // The child level that we are working with
+  isExpanded, // If we are showing child of a parent or not
+  hasChildrenitems // If it is a empty folder
 }) => {
   return (
     <View>
       <Text style={{ marginLeft: 25 * level }}>
-        {getIndicator(isExpanded, hasChildrenNodes, node)} {node.name}
+        {getIcon(isExpanded, hasChildrenitems, item)}
+        <View style={styles.dirItemContainer}>
+          <Text style={styles.dirItemName}>
+            {` ${item.name}`}
+          </Text>
+        </View>
+        <View style={styles.emptyContainer}>
+          {item.type === dirItems.types.dir && !item.files.length &&
+            <Text style={styles.empty}>
+              {dirItems.states.empty}
+            </Text>
+          }
+        </View>
       </Text>
     </View>
   );

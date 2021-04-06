@@ -1,9 +1,10 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import { styles } from './Header.styles';
+import { defaultAppName } from '../../utils/constants';
 
 type Props = {
-  title?: string;
+  title?: string; // App Name
 };
 
 /*
@@ -12,7 +13,7 @@ type Props = {
 */
 
 const Header: React.FC<Props> = ({
-  title = 'Nubi App'
+  title = defaultAppName
 }) => (
   <View style={styles.header}>
     <Text style={styles.headerTitle}>
