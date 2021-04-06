@@ -1,8 +1,12 @@
 import { StyleSheet } from 'react-native';
-import { theme } from '../../utils/constants';
 
 export const styles = StyleSheet.create({
   directoryContainer: {
-    backgroundColor: theme.color.secondary
+    backgroundColor: 'lightgrey',
+    borderRadius: 10,
+    padding: 20
+  },
+  directoryItem: {
+    backgroundColor: 'red'
   }
 });

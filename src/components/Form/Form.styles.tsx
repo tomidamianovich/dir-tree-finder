@@ -1,8 +1,15 @@
 import { StyleSheet } from 'react-native';
-import { width } from '../../utils/constants';
+import { theme } from '../../utils/constants';
 
 export const styles = StyleSheet.create({
-  form: {
-    width: width
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10
+  },
+  button: {
+    backgroundColor: theme.color.primary,
+    color: theme.color.light
   }
 });

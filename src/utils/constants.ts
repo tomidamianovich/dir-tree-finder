@@ -23,3 +23,12 @@ export const theme = {
 // Dimensions and screens
 export const width = Dimensions.get('window').width;
 export const height = Dimensions.get('window').height;
+
+
+export const formConst = {
+  inputLabel: 'Introduce the url that you want to find the tree',
+  searchButtonText: 'Search',
+  refreshButtonText: 'Refresh',
+  loadingText: 'Loading',
+  placeholderUrl: 'https://run.mocky.io/v3/...'
+}
