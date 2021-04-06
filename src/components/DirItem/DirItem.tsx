@@ -33,6 +33,7 @@ const getIcon = (isExpanded: boolean, hasChildrenitems: boolean, item: Directory
   }
   return <FontAwesomeIcon icon={ icon } size={18} color={theme.color.gray} />;
 };
+
 const DirItem: React.FC<Props> = ({
   item, // A directory child
   level, // The child level that we are working with

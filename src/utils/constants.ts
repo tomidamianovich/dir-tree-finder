@@ -16,6 +16,7 @@ export const theme = {
     light: '#ffffff',
     dark: '#151c34',
     gray: '#808080',
+    lightgrey: "#d3d3d3",
     info: '#17a2b8',
     warning: '#dc3545'
   }
