@@ -1,13 +1,16 @@
 import React from 'react';
-import { View } from 'react-native';
+import { ScrollView, Text } from 'react-native';
 import { styles } from './DirTree.styles';
 import { Directory } from '../../utils/types';
+import { formConst } from '../../utils/constants';
 import TreeView from 'react-native-final-tree-view';
 import DirItem from '../DirItem/DirItem';
 
 type Props = {
-  dirList?: Directory[];
-  index2?: number
+  dirList?: Directory[]; // The list of directories
+  alreadyRequested: boolean, // Needed to know if we show the empty msg.
+  error: boolean, // Shows an error and depending on urlNot valid the msg.
+  urlNotValid: boolean // Determines the kind of erorr msg.
 };
 
 /*
@@ -17,23 +20,46 @@ type Props = {
 */
 
 const DirTree: React.FC<Props> = ({
-  dirList = []
+  dirList = [],
+  alreadyRequested,
+  error,
+  urlNotValid
 }) => {
   return (
-    <View style={styles.directoryContainer}>
-      <TreeView
-        idKey="name"
-        childrenKey="files"
-        data={dirList} // defined above
-        renderNode={({ node, level, isExpanded, hasChildrenNodes }) =>
-          <DirItem
-            node={node}
-            level={level}
-            isExpanded={isExpanded}
-            hasChildrenNodes={hasChildrenNodes} />
+    <>
+      {
+        dirList.length > 0 &&
+      <ScrollView style={styles.directoryContainer}>
+        <TreeView
+          idKey="name"
+          childrenKey="files"
+          data={dirList} // defined above
+          renderNode={({ node, level, isExpanded, hasChildrenNodes }) =>
+            <DirItem
+              item={node}
+              level={level}
+              isExpanded={isExpanded}
+              hasChildrenitems={hasChildrenNodes} />
+          }
+        />
+      </ScrollView>
+      }
+      { !dirList.length && alreadyRequested && !error &&
+        <Text style={styles.noDataMsg}>
+          { formConst.info.dirEmpty }
+        </Text>
+      }
+      { error &&
+      <Text style={styles.erroMsg}>
+        {
+          urlNotValid
+            ? `${formConst.errors.invalidUrl} \n(Ex. ${formConst.placeholderUrl})`
+            : formConst.errors.request
         }
-      />
-    </View>
+
+      </Text>
+      }
+    </>
   );
 };
 

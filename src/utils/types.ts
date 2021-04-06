@@ -11,5 +11,5 @@ export type File = {
 export type Directory = {
   type: string,
   name: string
-  files: Directory[] | Directory
-} | [];
+  files: Directory[]
+};

@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { theme, width, height } from './src/utils/constants'
+import { theme } from './src/utils/constants'
 
 export const styles = StyleSheet.create({
   container: {
@@ -7,13 +7,15 @@ export const styles = StyleSheet.create({
     backgroundColor: theme.color.light,
     alignItems: 'center',
     justifyContent: 'center',
-    width: width,
-    height: height
+    width: '100%',
+    height: '100%'
+  },
+  spinner: {
+    margin: 20
   },
   scrollableContainer: {
     flex: 1,
-    width: width,
-    height: '90%',
+    width: '100%',
     padding: 20,
     backgroundColor: theme.color.secondary,
   },
